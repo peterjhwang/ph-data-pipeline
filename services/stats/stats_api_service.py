@@ -19,7 +19,7 @@ def stats_api_refresh():
             application.logger.info('Loading ' + resource_id)
             temp_df = get_odata(END_POINT, f"$filter=(ResourceID eq '{resource_id}')", STATS_API_KEY)
             if len(temp_df)>0:
-                temp_df['Period'] = pd.to_datetime(temp_df['Period'])
+                temp_df['Period'] = pd.to_datetime(temp_df['Period'],errors='coerce')
                 #print(resource_id, len(temp_df), temp_df['Period'].min(), '-', temp_df['Period'].max())
                 count += len(temp_df)
                 if resource_id in ['CPTRD2', 'CPTRD4', 'CPTRD1', 'CPTRD5']:
